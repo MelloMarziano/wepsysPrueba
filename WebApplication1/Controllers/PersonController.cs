@@ -18,8 +18,29 @@ namespace WebApplication1.Controllers
         }
 
         // POST api/<controller>
-        public bool Post([FromBody] Persona persona) {
-            return PersonData.registerPerson(persona);
+        //public bool Postss([FromBody] Persona persona) {
+        //    return PersonData.registerPerson(persona);
+        //}
+
+        // POST api/<controller>
+        public HttpResponseMessage Post(Persona persona) {
+            if (ModelState.IsValid)
+            {
+               var result =  PersonData.registerPerson(persona);
+                if (result)
+                {
+                    return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+               
+            }
+            else
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
         }
 
         public Persona Get(string matricula)
