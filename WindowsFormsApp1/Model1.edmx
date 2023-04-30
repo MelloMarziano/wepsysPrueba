@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBMATRICULASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="PERSONA">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdPersona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Matricula" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
+          <Property Name="UbicacionLatitud" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="UbicacionLongitud" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="UbicacionAltitud" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <Function Name="stp_findAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="stp_findByMatricula" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="matricula" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="stp_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombres" Type="varchar" Mode="In" />
+          <Parameter Name="apellidos" Type="varchar" Mode="In" />
+          <Parameter Name="matricula" Type="varchar" Mode="In" />
+          <Parameter Name="fechaNAcimiento" Type="datetime" Mode="In" />
+          <Parameter Name="ubicacionLatitud" Type="decimal" Mode="In" />
+          <Parameter Name="ubicacionLongitud" Type="decimal" Mode="In" />
+          <Parameter Name="ubicacionAltitud" Type="decimal" Mode="In" />
+        </Function>
+        <EntityContainer Name="DBMATRICULASModelStoreContainer">
+          <EntitySet Name="PERSONA" EntityType="Self.PERSONA" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBMATRICULASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="PERSONA">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdPersona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Matricula" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UbicacionLatitud" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UbicacionLongitud" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UbicacionAltitud" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityContainer Name="DBMATRICULASEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PERSONA" EntityType="Self.PERSONA" />
+          <FunctionImport Name="stp_findAll" ReturnType="Collection(DBMATRICULASModel.stp_findAll_Result)" />
+          <FunctionImport Name="stp_findByMatricula" ReturnType="Collection(DBMATRICULASModel.stp_findByMatricula_Result)">
+          <Parameter Name="matricula" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="stp_insert">
+            <Parameter Name="nombres" Mode="In" Type="String" />
+            <Parameter Name="apellidos" Mode="In" Type="String" />
+            <Parameter Name="matricula" Mode="In" Type="String" />
+            <Parameter Name="fechaNAcimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="ubicacionLatitud" Mode="In" Type="Decimal" />
+            <Parameter Name="ubicacionLongitud" Mode="In" Type="Decimal" />
+            <Parameter Name="ubicacionAltitud" Mode="In" Type="Decimal" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="stp_findAll_Result">
+          <Property Type="Int32" Name="IdPersona" Nullable="false" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Apellidos" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Matricula" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="false" Precision="23" />
+          <Property Type="Decimal" Name="UbicacionLatitud" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="UbicacionLongitud" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="UbicacionAltitud" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="stp_findByMatricula_Result">
+          <Property Type="Int32" Name="IdPersona" Nullable="false" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Apellidos" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Matricula" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="false" Precision="23" />
+          <Property Type="Decimal" Name="UbicacionLatitud" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="UbicacionLongitud" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="UbicacionAltitud" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBMATRICULASModelStoreContainer" CdmEntityContainer="DBMATRICULASEntities">
+          <EntitySetMapping Name="PERSONA">
+            <EntityTypeMapping TypeName="DBMATRICULASModel.PERSONA">
+              <MappingFragment StoreEntitySet="PERSONA">
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="UbicacionLatitud" ColumnName="UbicacionLatitud" />
+                <ScalarProperty Name="UbicacionLongitud" ColumnName="UbicacionLongitud" />
+                <ScalarProperty Name="UbicacionAltitud" ColumnName="UbicacionAltitud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="stp_findAll" FunctionName="DBMATRICULASModel.Store.stp_findAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMATRICULASModel.stp_findAll_Result">
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="UbicacionLatitud" ColumnName="UbicacionLatitud" />
+                <ScalarProperty Name="UbicacionLongitud" ColumnName="UbicacionLongitud" />
+                <ScalarProperty Name="UbicacionAltitud" ColumnName="UbicacionAltitud" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_findByMatricula" FunctionName="DBMATRICULASModel.Store.stp_findByMatricula">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBMATRICULASModel.stp_findByMatricula_Result">
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="UbicacionLatitud" ColumnName="UbicacionLatitud" />
+                <ScalarProperty Name="UbicacionLongitud" ColumnName="UbicacionLongitud" />
+                <ScalarProperty Name="UbicacionAltitud" ColumnName="UbicacionAltitud" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="stp_insert" FunctionName="DBMATRICULASModel.Store.stp_insert" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
