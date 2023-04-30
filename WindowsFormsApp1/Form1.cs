@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -50,22 +51,43 @@ namespace WindowsFormsApp1
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            if(txtNombre.Text != "" && txtApellido.Text != "" && txtMatricula.Text != "" && dtpFechaNacimiento.Text != "")
+            Decimal.TryParse(txtLactitud.Text, out decimal uLactitud);
+            Decimal.TryParse(txtLongitud.Text, out decimal uLongitud);
+            Decimal.TryParse(txtAltitud.Text, out decimal uAltitud);
+            PERSONA persona = new PERSONA
             {
-                Decimal.TryParse(txtLactitud.Text, out decimal uLactitud);
-                Decimal.TryParse(txtLongitud.Text, out decimal uLongitud);
-                Decimal.TryParse(txtAltitud.Text, out decimal uAltitud);
-                registerData(txtNombre.Text, 
-                    txtApellido.Text,
-                    dtpFechaNacimiento.Value, 
-                    txtMatricula.Text,
-                    uLactitud,
-                    uLongitud,
-                    uAltitud
-                    );
+                Nombres = txtNombre.Text,
+                Apellidos =    txtApellido.Text,
+                 FechaNacimiento =   dtpFechaNacimiento.Value,
+                 Matricula =   txtMatricula.Text,
+              UbicacionLatitud =  uLactitud,
+           UbicacionLongitud = uLongitud,
+           UbicacionAltitud = uAltitud,
+        };
+            ValidationContext context = new ValidationContext(persona, null, null);
+            string errorList = "";
+            IList<ValidationResult> errors = new List<ValidationResult>();
+            if (!Validator.TryValidateObject(persona, context, errors, true))
+            {
+                foreach (ValidationResult result in errors)
+                {
+                    errorList += result.ErrorMessage + "\n";
+                }
+                MessageBox.Show(errorList);
+            }
+            else
+            {
+                registerData(persona);
                 limpiarCampos();
                 dataGridView1.DataSource = getAllPerson();
             }
+
+            if (txtNombre.Text != "" && txtApellido.Text != "" && txtMatricula.Text != "" && dtpFechaNacimiento.Text != "")
+            {
+                
+                
+            }
+            
             
         }
         private void limpiarCampos()
@@ -79,11 +101,11 @@ namespace WindowsFormsApp1
             dtpFechaNacimiento.ResetText();
         }
 
-        public void registerData(string nombres,string apellidos, DateTime fechaNacimiento, string matricula, decimal ubicacionLatitud, decimal ubicacionLongitud, decimal ubicacionAltitud)
+        public void registerData(PERSONA persona)
         {
             using (DBMATRICULASEntities db = new DBMATRICULASEntities())
             {
-                db.stp_insert(nombres, apellidos, matricula, fechaNacimiento, ubicacionLatitud, ubicacionLongitud, ubicacionAltitud);
+                db.stp_insert(persona.Nombres, persona.Apellidos, persona.Matricula, persona.FechaNacimiento, persona.UbicacionLatitud, persona.UbicacionLatitud, persona.UbicacionAltitud);
             }
            
         }

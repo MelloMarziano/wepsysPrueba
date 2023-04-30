@@ -7,16 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
 namespace WindowsFormsApp1
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class PERSONA
     {
         public int IdPersona { get; set; }
+        [Required(ErrorMessage = "El campo nombre no puede estar vacio")]
+        [StringLength(100)]
         public string Nombres { get; set; }
+        [Required(ErrorMessage = "El campo Apellido no puede estar vacio")]
+        [StringLength(100)]
         public string Apellidos { get; set; }
+        [Required(ErrorMessage = "El campo Matricula no puede estar vacio")]
+        [MaxLength(10, ErrorMessage = "La matricula no puede ser mayor a 10 Caracteres")]
+        [MinLength(10, ErrorMessage = "La matricula no puede ser menor de 10 Caracteres")]
+        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "La matricula solo admite letras y numeros")]
         public string Matricula { get; set; }
         public System.DateTime FechaNacimiento { get; set; }
         public Nullable<decimal> UbicacionLatitud { get; set; }

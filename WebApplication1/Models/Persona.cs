@@ -18,7 +18,7 @@ namespace WebApplication1.Models
         [Required(ErrorMessage = "El campo Matricula no puede estar vacio")]
         [MaxLength(10, ErrorMessage = "La matricula no puede ser mayor a 10 Caracteres")]
         [MinLength(10, ErrorMessage = "La matricula no puede ser menor de 10 Caracteres")]
-        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Solo se admiten letras y numeros")]
+        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "La matricula solo admite letras y numeros")]
 
         public string Matricula { get; set; }
         public DateTime FechaNacimiento { get; set; }
