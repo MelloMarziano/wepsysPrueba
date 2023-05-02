@@ -12,15 +12,11 @@ namespace WebApplication1.Controllers
     public class PersonController : ApiController
     {
 
+        // GET api/<controller>
         public List<Persona> Get()
         {
             return PersonData.getAllPersons();
         }
-
-        // POST api/<controller>
-        //public bool Postss([FromBody] Persona persona) {
-        //    return PersonData.registerPerson(persona);
-        //}
 
         // POST api/<controller>
         public HttpResponseMessage Post(Persona persona) {
@@ -43,6 +39,7 @@ namespace WebApplication1.Controllers
             }
         }
 
+        // GET api/<controller>/:matricula
         public Persona Get(string matricula)
         {
             return PersonData.getByMatricula(matricula);
