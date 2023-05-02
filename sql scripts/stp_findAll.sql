@@ -1,0 +1,14 @@
+USE DBMATRICULAS
+GO
+
+IF EXISTS (SELECT * FROM sys.objects WHERE [type]='p' AND name = 'stp_findAll')
+DROP PROCEDURE stp_findAll
+GO
+
+CREATE PROCEDURE stp_findAll
+AS
+BEGIN
+
+SELECT * FROM [DBMATRICULAS].[dbo].[PERSONA]
+
+END
